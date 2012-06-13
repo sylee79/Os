@@ -71,6 +71,7 @@ if (0) {
 //	}
 	
 	$route["default_controller"] = "$folder/default_controller";
+    $route['admin']='admin/admin';
 	
 	$requestUri = $_SERVER["REQUEST_URI"];
 	$requestToks = strtok($requestUri, "/");
@@ -94,7 +95,9 @@ if (0) {
 		}
 	}
 	$route['404_override'] = '';
+    $route['admin']='admin/admin';
 	$route['(:any)'] = $route['default_controller'] . "/$1";
+//    echo json_encode($route);exit;
 }
 //echo json_encode($route);exit;
 
