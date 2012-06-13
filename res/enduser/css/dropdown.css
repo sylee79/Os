@@ -1,0 +1,20 @@
+#menu {position:relative; z-index:200; }
+#menu li li{margin-right: 0; border-left: none; }
+
+.downarrowclass {	background:url(../images/down.png) no-repeat center; padding:5px 12px;}
+.rightarrowclass {background:url(../images/right.png) no-repeat center right;	padding: 10px;	position:absolute; right:10px;	}
+
+/*Top level list items*/
+.dropdown ul li{position: relative; display: inline; margin-right: 0; }
+/*Top level menu link items style*/
+.dropdown ul li a{text-decoration: none; }
+* html .dropdown ul li a{ /*IE6 hack to get sub menu links to behave correctly*/ display: inline-block; }
+
+/*1st sub level menu*/
+.dropdown ul li ul {position: absolute; left: 0; display: block; visibility: hidden; z-index:100; background:#333; text-align:left; margin:0; -moz-border-radius: 15px; -khtml-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px;}
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+.dropdown ul li ul li ul{top: 0;}
+/* Sub level menu links style */
+.dropdown ul li ul li a {width: 160px; padding: 5px 10px; margin: 0; border-top-width: 0; color:#fff; text-transform:none; display:block; }
+.dropdown ul li ul li:last-child a, .dropdown ul li ul li:last-child a:hover {border:none;}
+.dropdown ul li ul li a:hover { color:#000; }

@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !=/server-status
+RewriteCond $1 !^(ga\.php|index\.php|xajax_js|res|robots\.txt|2016119\.html)
+RewriteRule ^(.*)$ /index.php/$1 [L]
