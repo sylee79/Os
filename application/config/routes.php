@@ -56,7 +56,8 @@ if (0) {
 	$route['404_override'] = '';
 	$route['(:any)'] = $route['default_controller'] . "/$1";
 } else {
-	$wildcard_exceptions = array("login", "logout");
+//	$wildcard_exceptions = array("login", "logout");
+    $wildcard_exceptions = array();
 
 	$folder = "";
 //	if (fnmatch('*.*:*', $domain)) {
@@ -71,8 +72,7 @@ if (0) {
 //	}
 	
 	$route["default_controller"] = "$folder/default_controller";
-    $route['admin']='admin/admin';
-	
+
 	$requestUri = $_SERVER["REQUEST_URI"];
 	$requestToks = strtok($requestUri, "/");
 	$firstComponent  = false;
@@ -96,6 +96,7 @@ if (0) {
 	}
 	$route['404_override'] = '';
     $route['admin']='admin/admin';
+    $route['admin/(:any)']='admin/admin/$1';
 	$route['(:any)'] = $route['default_controller'] . "/$1";
 //    echo json_encode($route);exit;
 }

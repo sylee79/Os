@@ -1,0 +1,12 @@
+
+<span class="wide_content" style="background-color: white;color: black;font-size: 11px;">
+	<h1>Product List</h1>
+	<a href="/admin/product/new" class="buttonize">Create Product</a><br/><br/>
+
+	{datatable
+		headers=$product_list_headers
+		keys=$product_list_keys
+		rows=$product_list
+		table_id="product_view_table"}
+
+</span>

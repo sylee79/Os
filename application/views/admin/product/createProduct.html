@@ -1,0 +1,91 @@
+
+    <span class="content">
+        <form action="/admin/product" method="post">
+        <div class="edit">
+            <p class="edit_title">Create Product</p>
+            <div class="message">{echo var='message'}</div><br/><br/>
+            <div class="edit_content">
+                <div class="edit_question">*Manufacturer:</div>
+                <p>
+                    <select name="manufacturer_id">
+                        {foreach $selectionManufacturer as $entry}
+                        <option value={$entry.id} {isSelected val=$entry.id selVar='manufacturer_id'}>{$entry.name}</option>
+                        {/foreach}
+                    </select>
+                </p>
+	        </div>
+
+            <div class="edit_content">
+                <div class="edit_question">*Category:</div>
+                <p>
+                    <select name="category_id">
+                        {foreach $selectionCategory as $entry}
+                        <option value={$entry.id} {isSelected val=$entry.id selVar='category_id'}>{$entry.name}</option>
+                        {/foreach}
+                    </select>
+                </p>
+	        </div>
+
+            <div class="edit_content">
+                <div class="edit_question">*Priority:</div>
+                <p>
+                    <select name="priority">
+                        {foreach $selectionPriority as $entry}
+                        <option value={$entry.id} {if isset($priority) && $priority == $entry.id}selected{/if}>{$entry.name}</option>
+                        {/foreach}
+                    </select>
+                </p>
+	        </div>
+
+			<div class="edit_content">
+			    <div class="edit_question">*Product Title:</div><p><input type="text" {init name='title_en'}></p>
+			</div>
+			<div class="edit_content">
+			    <div class="edit_question">*Product Description:</div><p><textarea id="description" name="description_en" type="text">{echo var='description_en'}</textarea></p>
+			</div>
+            <div class="edit_content">
+                <div class="edit_question">Price({$currency}):</div><p><input type="text" {init name='price' default=''}></p>
+            </div>
+			<div class="edit_content">
+			    <div class="edit_question">Reference Price({$currency}):</div><p><input type="text" {init name='reference_price' default=''}></p>
+			</div>
+
+            <br/>
+            <hr width='98%'>
+            <br/>
+
+
+			<div class="edit_content">
+			    <div class="edit_question">Variation Type:</div><p><input type="text" {init name='variation_type_en' default=''}></p>
+			</div>
+
+            <div class="edit_content">
+                <div class="edit_question">Variation Value:</div><p><input type="text" {init name='variation_value_en' default=''}></p>
+            </div>
+
+            <div class="edit_question">
+                <input name="action" type="submit" value="add variation >>">
+                <br/>
+                <br/>
+                {if $productVariation|@count - 1}
+                <input name="action" type="submit" value="<< remove variation">
+                {else}
+                <input name="action" type="submit" value="<< remove variation" disabled>
+                {/if}
+            </div>
+            <input type="hidden" name="product_variation_json" value="{$productVariationJson}">
+            <select size=5 name='variation_type' style="min-width: 260px">
+                {foreach $productVariation as $entry}
+                    <option value="{$entry.type_en}">{$entry.type_en}=> {$entry.value_en}</option>
+                {/foreach}
+            </select>
+            <br/> <br/> <br/>
+			<div class="edit_save_b"><input name="action" type="submit" value="create & new">
+			                         <input name="action" type="submit" value="create & add image">
+			</div>
+			<br/>
+			<br/>
+        </div>
+        </form>
+
+    </span>

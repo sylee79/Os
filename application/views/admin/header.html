@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Admin Site</title>
+	<link href='/res/admin/main.css' rel='stylesheet' type='text/css'>
+	<link href='/res/admin/main-oam.css' rel='stylesheet' type='text/css'>
+	<script src="/res/admin/oam_common.js"></script>
+	<!--script src="/res/admin/jquery-1.6.4.min.js"></script-->
+    <script src="/res/admin/validate/js/languages/jquery-1.7.1.min.js"></script>
+	<script src="/res/admin/jquery-ui-1.8.16.custom.min.js"></script>
+	<link href="/res/admin/cupertino/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
+
+	<script src="/res/admin/datatables/js/jquery.dataTables.min.js"></script>
+	<link href="/res/admin/datatables/css/demo_page.css" rel="stylesheet" type="text/css">
+	<link href="/res/admin/datatables/css/demo_table.css" rel="stylesheet" type="text/css">
+	<script src="/res/admin/datatables/tabletools/js/ZeroClipboard.js" type="text/javascript"></script>
+	<script src="/res/admin/datatables/tabletools/js/TableTools.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="/res/admin/datatables/tabletools/css/TableTools.css" />
+	<script src="/res/admin/datatables/columnfilter/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+
+
+	<link href='/res/admin/formalize/css/formalize.css' rel='stylesheet' type='text/css'>
+	<script src='/res/admin/formalize/js/jquery.formalize.min.js'></script>
+	<!--  script src='/res/admin/image/js/jquery.min.js'></script> -->
+	<script src='/res/admin/image/js/jquery.Jcrop.min.js'></script>
+        <script language="Javascript">
+
+			function trim(str) {
+				str = str.replace(/^\s+/, '');
+				for (var i = str.length - 1; i >= 0; i--) {
+					if (/\S/.test(str.charAt(i))) {
+						str = str.substring(0, i + 1);
+						break;
+					}
+				}
+				return str;
+			}
+
+			jQuery.fn.dataTableExt.oSort['date-euro-asc'] = function(a, b) {
+				if (trim(a) != '') {
+					var frDatea = trim(a).split(' ');
+					var frTimea = frDatea[1].split(':');
+					var frDatea2 = frDatea[0].split('/');
+					var x = (frDatea2[2] + frDatea2[1] + frDatea2[0] + frTimea[0] + frTimea[1] + frTimea[2]) * 1;
+				} else {
+					var x = 10000000000000; // = l'an 1000 ...
+				}
+
+				if (trim(b) != '') {
+					var frDateb = trim(b).split(' ');
+					var frTimeb = frDateb[1].split(':');
+					frDateb = frDateb[0].split('/');
+					var y = (frDateb[2] + frDateb[1] + frDateb[0] + frTimeb[0] + frTimeb[1] + frTimeb[2]) * 1;
+				} else {
+					var y = 10000000000000;
+				}
+				var z = ((x < y) ? -1 : ((x > y) ? 1 : 0));
+				return z;
+			};
+
+			jQuery.fn.dataTableExt.oSort['date-euro-desc'] = function(a, b) {
+				if (trim(a) != '') {
+					var frDatea = trim(a).split(' ');
+					var frTimea = frDatea[1].split(':');
+					var frDatea2 = frDatea[0].split('/');
+					var x = (frDatea2[2] + frDatea2[1] + frDatea2[0] + frTimea[0] + frTimea[1] + frTimea[2]) * 1;
+				} else {
+					var x = 10000000000000;
+				}
+
+				if (trim(b) != '') {
+					var frDateb = trim(b).split(' ');
+					var frTimeb = frDateb[1].split(':');
+					frDateb = frDateb[0].split('/');
+					var y = (frDateb[2] + frDateb[1] + frDateb[0] + frTimeb[0] + frTimeb[1] + frTimeb[2]) * 1;
+				} else {
+					var y = 10000000000000;
+				}
+				var z = ((x < y) ? 1 : ((x > y) ? -1 : 0));
+				return z;
+			};
+
+			jQuery.fn.dataTableExt.oSort['uk_date-asc']  = function(a,b) {
+				var ukDatea = a.split('/');
+				var ukDateb = b.split('/');
+
+				var x = (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+				var y = (ukDateb[2] + ukDateb[1] + ukDateb[0]) * 1;
+
+				return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+			};
+
+			jQuery.fn.dataTableExt.oSort['uk_date-desc'] = function(a,b) {
+				var ukDatea = a.split('/');
+				var ukDateb = b.split('/');
+
+				var x = (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+				var y = (ukDateb[2] + ukDateb[1] + ukDateb[0]) * 1;
+
+				return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
+			};
+
+			$.fn.dataTableExt.oApi.fnGetFilteredData = function ( oSettings ) {
+				var a = [];
+				for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ ) {
+					a.push(oSettings.aoData[ oSettings.aiDisplay[i] ]._aData);
+				}
+				return a;
+			}
+			//date formats:
+			//date-euro - dd/mm/YYY hh:ii:ss
+			//uk_date - dd/mm/YY
+
+            // Remember to invoke within jQuery(window).load(...)
+            // If you don't, Jcrop may not initialize properly
+            $(document).ready(function() {
+				$(":button").each(function() {
+					var href = $(this).attr("href");
+					if (href != undefined) {
+						$(this).click(function() {
+							window.location.href = href;
+						});
+					}
+				});
+
+
+				$(".default_datatable").each(function(){
+					$(this).dataTable({
+					    'sPaginationType': 'full_numbers',
+					    'iDisplayLength':100
+					}).columnFilter();
+				});
+				$(".default_datatable > tbody > tr").attr("valign", "top");
+
+                jQuery('#cropbox').Jcrop({
+                    onChange: showPreview,
+                    onSelect: showPreview,
+                    bgOpacity: .6,
+                    aspectRatio: 1, //.875,
+                    setSelect:   [ 0, 0, 0, 0 ],
+
+                });
+
+				$(".buttonize").each(function() {
+					$(this).button();
+					$(this).addClass("buttonize");
+				});
+
+            });
+
+            // Our simple event handler, called from onChange and onSelect
+            // event handlers, as per the Jcrop invocation above
+            function showPreview(coords)
+            {
+                jQuery('#x').val(coords.x);
+                jQuery('#y').val(coords.y);
+                jQuery('#x2').val(coords.x2);
+                jQuery('#y2').val(coords.y2);
+                jQuery('#w').val(coords.w);
+                jQuery('#h').val(coords.h);
+
+                if (parseInt(coords.w) > 0)
+                {
+                    var rx = 175 / coords.w;
+                    var ry = 175 / coords.h;
+
+                    jQuery('#preview').css({
+                        width: Math.round(rx * $('#cropbox').width()) + 'px',
+                        height: Math.round(ry * $('#cropbox').height()) + 'px',
+                        marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                        marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                    });
+                }
+            }
+
+        </script>
+
+
+    <script src="/res/admin/validate/js/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/res/admin/validate/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/res/admin/validate/css/validationEngine.jquery.css" type="text/css"/>
+
+</head>
+
+<body>
+	<span class="header">
+		Management System
+		{if $hide_menu == false}
+		<span class="header_right">
+			You are logged in as <b>{$oam_user.email_address}</b><br/>
+			<a href="/admin/logout">Logout</a>
+		</span>
+		{else}
+		{/if}
+	</span>
+	{if $hide_menu == false}
+	<span class="menubar" style="margin-bottom: 0px">
+		<ul>
+			<li class="{if $main_menu == 'product'}selected{/if}"><a href="/admin/Product">Products</a></li>
+			<li class="{if $main_menu == 'manufacturerOption'}selected{/if}"><a href="/manage/manufacturerOption">Manufacturer</a></li>
+			<li class="{if $main_menu == 'suppliers'}selected{/if}"><a href="/manage/suppliers">Suppliers</a></li>
+			<li class="{if $main_menu == 'categoryOption'}selected{/if}"><a href="/manage/categoryOption">Categories</a></li>
+			<li class="{if $main_menu == 'customer'}selected{/if}"><a href="/manage/customer">Customers</a></li>
+            <li class="{if $main_menu == 'config'}selected{/if}"><a href="/manage/config">Config</a></li>
+		</ul>
+	</span>
+
+	{/if}
+	<span class="middle_container">

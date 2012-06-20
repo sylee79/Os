@@ -100,6 +100,7 @@ abstract class BaseCategory extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
+             'default' => '0',
              'notnull' => false,
              'autoincrement' => false,
              ));

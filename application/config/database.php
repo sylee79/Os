@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'default';
+$active_group = 'sc_dev';
 $active_record = TRUE;
 
 $db_domain_mapping = array(

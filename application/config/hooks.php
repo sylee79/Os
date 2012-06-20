@@ -10,7 +10,11 @@
 |
 */
 
-
+$hook['pre_system'][] = array(
+	'function' => 'bootstrap_doctrine',
+	'filename' => 'doctrine.php',
+	'filepath' => 'hooks'
+);
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

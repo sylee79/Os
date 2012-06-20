@@ -6,7 +6,7 @@ class basewebappcontroller extends CI_Controller {
 		if (!defined('CDN_PREFIX')) {
 			define('CDN_PREFIX', '/res');
 		}
-
+        $this->load->helper("clog");
 	}
 
 	protected function _render($page, &$data = array(), $returnAsString = false) {

@@ -19,7 +19,6 @@ Doctrine_Manager::getInstance()->bindComponent('Product', 'testdb');
  * @property string $keywords
  * @property decimal $reference_price
  * @property decimal $price
- * @property string $variation
  * @property integer $priority
  * @property integer $is_deleted
  * @property OamUser $OamUser
@@ -146,15 +145,6 @@ abstract class BaseProduct extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              'scale' => '2',
-             ));
-        $this->hasColumn('variation', 'string', 1024, array(
-             'type' => 'string',
-             'length' => 1024,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
              ));
         $this->hasColumn('priority', 'integer', 1, array(
              'type' => 'integer',
