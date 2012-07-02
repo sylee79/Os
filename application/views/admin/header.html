@@ -138,7 +138,7 @@
                     onChange: showPreview,
                     onSelect: showPreview,
                     bgOpacity: .6,
-                    aspectRatio: 1, //.875,
+                    aspectRatio: 1.25, //.875,
                     setSelect:   [ 0, 0, 0, 0 ],
 
                 });
@@ -163,8 +163,8 @@
 
                 if (parseInt(coords.w) > 0)
                 {
-                    var rx = 175 / coords.w;
-                    var ry = 175 / coords.h;
+                    var rx = 225 / coords.w;
+                    var ry = 180 / coords.h;
 
                     jQuery('#preview').css({
                         width: Math.round(rx * $('#cropbox').width()) + 'px',
@@ -199,11 +199,11 @@
 	<span class="menubar" style="margin-bottom: 0px">
 		<ul>
 			<li class="{if $main_menu == 'product'}selected{/if}"><a href="/admin/Product">Products</a></li>
-			<li class="{if $main_menu == 'manufacturerOption'}selected{/if}"><a href="/manage/manufacturerOption">Manufacturer</a></li>
-			<li class="{if $main_menu == 'suppliers'}selected{/if}"><a href="/manage/suppliers">Suppliers</a></li>
-			<li class="{if $main_menu == 'categoryOption'}selected{/if}"><a href="/manage/categoryOption">Categories</a></li>
-			<li class="{if $main_menu == 'customer'}selected{/if}"><a href="/manage/customer">Customers</a></li>
-            <li class="{if $main_menu == 'config'}selected{/if}"><a href="/manage/config">Config</a></li>
+			<!--<li class="{if $main_menu == 'manufacturerOption'}selected{/if}"><a href="/manage/manufacturerOption">Manufacturer</a></li>-->
+			<!--<li class="{if $main_menu == 'suppliers'}selected{/if}"><a href="/manage/suppliers">Suppliers</a></li>-->
+			<!--<li class="{if $main_menu == 'categoryOption'}selected{/if}"><a href="/manage/categoryOption">Categories</a></li>-->
+			<!--<li class="{if $main_menu == 'customer'}selected{/if}"><a href="/manage/customer">Customers</a></li>-->
+            <!--<li class="{if $main_menu == 'config'}selected{/if}"><a href="/manage/config">Config</a></li>-->
 		</ul>
 	</span>
 

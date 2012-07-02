@@ -2,7 +2,7 @@
 
 require_once "baseendusercontroller.php";
 
-class default_controller extends baseendusercontroller {
+class enduser extends baseendusercontroller {
 	
 	function __construct() {
 		parent::__construct();

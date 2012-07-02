@@ -180,7 +180,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------
@@ -236,7 +236,7 @@ $config['encryption_key'] = 'wlsdkjflnkvlcxkvofjsdoifmlkewjlfdsm';
 |   by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
 | 'sess_expire_on_close'	= Whether to cause the session to expire automatically
 |   when the browser window is closed
-| 'sess_encrypt_cookie'		= Whether to encrypt the cookie
+| 'sess_encrypt_co;okie'		= Whether to encrypt the cookie
 | 'sess_use_database'		= Whether to save the session data to a database
 | 'sess_table_name'			= The name of the session database table
 | 'sess_match_ip'			= Whether to match the user's IP address when reading the session data
@@ -245,7 +245,7 @@ $config['encryption_key'] = 'wlsdkjflnkvlcxkvofjsdoifmlkewjlfdsm';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 0;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= TRUE;

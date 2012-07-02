@@ -97,7 +97,7 @@ abstract class BaseProductImage extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'default' => '1',
+             'default' => '0',
              'notnull' => false,
              'autoincrement' => false,
              ));

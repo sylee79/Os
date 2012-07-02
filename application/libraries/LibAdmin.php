@@ -1,9 +1,17 @@
 <?php
 require_once 'Constants.php';
-
+require_once 'common.php';
 
 class LibAdmin
 {
+    function deleteProduct($id){
+        if(!$id)return false;
+
+        $q = 'update product set is_deleted = 1 where id = '.$id;
+        return $this->getDBData($q,false);
+    }
+
+
     function createProduct($user, $data, $variationData)
     {
         try {
@@ -42,6 +50,94 @@ class LibAdmin
             $this->logException(__FUNCTION__, $e, (($newProduct && isset($newProduct['id'])) ? $newProduct['id'] : false), false);
             return false;
         }
+    }
+
+    function saveProduct($productId, $user, $data, $variationData)
+    {
+        try {
+            $product = Doctrine::getTable('Product')->findOneById($productId);
+            $product->added_by_oam_user_id = $user['id'];
+            $product->manufacturer_id = $data['manufacturer_id'];
+            $product->category_id = $data['category_id'];
+            $product->title_en = $data['title_en'];
+            $product->description_en = $data['description_en'];
+            $product->price = $data['price'];
+            $product->reference_price = $data['reference_price'];
+            $product->priority = $data['priority'];
+            $product->save();
+        }catch(exception $e){}
+
+        $q = 'update product_variation set is_deleted = 1, added_by_oam_user_id = '.$user['id'].' where product_id = '.$productId.' and is_deleted = 0';
+
+        $this->getDBData($q, false);
+
+        foreach ($variationData as $entry) {
+            try{
+                $productVariation = Doctrine::getTable('ProductVariation')->findOneByProductIdAndVariationTypeEn($productId, $entry['type_en']);
+                if(!$productVariation){
+                    $newProductVariation = new ProductVariation();
+                    $newProductVariation->added_by_oam_user_id = $user['id'];
+                    $newProductVariation->product_id = $productId;
+                    $newProductVariation->variation_type_en = $entry['type_en'];
+                    $newProductVariation->variation_value_en = $entry['value_en'];
+                    $newProductVariation->save();
+                    continue;
+                }
+                $productVariation->is_deleted = 0;
+                $productVariation->variation_value_en = $entry['value_en'];
+                $productVariation->save();
+            }catch(exception $e){}
+        }
+    }
+
+	function getPrecropImage($srcFile, $maxWidth=600, $maxHeight=480)
+	{
+		$image = new SimpleImage();
+		$image->load($srcFile);
+		$image->resizeKeepRatio($maxWidth, $maxHeight);
+		$width = $image->getWidth();
+		$image->save($srcFile);
+
+		return array('width'=>$width, 'filepath' =>Common::uploadPrecropImage($srcFile));
+	}
+
+    function deleteProductImage($id){
+        $q = 'select image_url from product_image where id = '.$id;
+        $result = $this->getDBData($q);
+        if(isset($result[0])){
+            if(false === stristr($result[0]['image_url'], 'default')){
+                unlink(BASEPATH."../".$result[0]['image_url']);
+            }
+            $q = 'delete from product_image where id = '.$id;
+            return $this->getDBData($q, false);
+        }
+        return false;
+    }
+
+    function setMainPreview($product, $imageId){
+        $q = 'update product_image set is_main = 0; update product_image set is_main = 1 where id = '.$imageId;
+        return $this->getDBData($q, false);
+    }
+
+	function createProductImage($id, $destFile)
+	{
+		try{
+			$productImage = new ProductImage();
+			$productImage->product_id = $id;
+            $productImage->is_main = 0;
+
+			$productImage->image_url = $destFile;
+			$productImage->save();
+
+			return true;
+		}catch(Exception $e){
+            $this->logException(__FUNCTION__, $e, $id, $destFile);
+			return false;
+		}
+	}
+
+    function updateImageDesc($imageId, $desc){
+        return $this->getDBData('update product_image set description = \''.$desc.'\' where id = '.$imageId, false);
     }
 
     function getProductImages($productId){
@@ -119,7 +215,7 @@ class LibAdmin
     }
 
     function getProductVariation($productId){
-        return $this->getDBData('select variation_type_en as type_en, variation_value_en as value_en from product_variation where product_id = '.$productId);
+        return $this->getDBData('select variation_type_en as type_en, variation_value_en as value_en from product_variation where product_id = '.$productId.' and is_deleted = 0');
     }
 
     function getManufacturer()
@@ -156,6 +252,12 @@ where c1.parent_category_id is null';
 
     function logException($function, $exception, $id = false, $comment = false)
     {
+        $newException = new ExceptionLog();
+        $newException->function_name = $function;
+        $newException->exception = $exception->getMessage();
+        $newException->id = $id;
+        $newException->comment = $comment;
+        $newException->save();
         echo("Exception at [$function][" . $exception->getLine() . "][$comment] :" . $exception->getMessage());
     }
 }

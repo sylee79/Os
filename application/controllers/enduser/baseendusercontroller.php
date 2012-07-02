@@ -12,4 +12,17 @@ class baseendusercontroller extends basewebappcontroller {
 		$data['subsystem'] = 'enduser';
 		parent::_render($page, $data, $returnAsString);
 	}
+
+    private function initRender(&$data, $page){
+    }
+
+    protected function render($page, $data = array())
+    {
+        $this->initRender($data, $page);
+        $this->parser->parse("enduser/$page.html", $data);
+        return;
+    }
+
+
+
 }

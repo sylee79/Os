@@ -1,6 +1,6 @@
 
-    <span class="content">
-        <form action="/admin/product/cropImage" enctype="multipart/form-data" method="post">
+    <span class="wide_content">
+        <form action="/admin/product/upload" enctype="multipart/form-data" method="post">
         <div class="edit">
             <p class="edit_title">Product Images</p>
             <div class="message">{echo var='message'}</div><br/><br/>
@@ -10,25 +10,25 @@
             </div>
 
             <div class="edit_content">
-                <div class="edit_question">Main Preview:</div>
+                <div class="edit_question">Main Image:</div>
                 <div class="show_preview_photo">
                     <img src="{echo var='image_url'}" width='350px'>
                 </div>
             </div>
 
             <div class="edit_content">
-                <div class="edit_question">Other Preview:</div><br/><br/>
-                <div class="show_preview_photo_small" style="margin:0 0 0 96px; width: 560px;">
+                <div class="edit_question">All Images:</div><br/><br/>
+                <div class="show_preview_photo_small" style="margin:0 0 0 96px; width: 480;">
                     {foreach $productImages as $entry}
-						<span style="width: 120px; height: auto" id="{$entry.id}">
-                            <img onClick="imageMenu({$product_id},{$entry.id},'{$entry.image_url}')" src={$entry.image_url} width='120px'>
+						<span style="width: 100px; height: auto" id="{$entry.id}">
+                            <img onClick="imageMenu({$product_id},{$entry.id},'{$entry.image_url}','{$entry.description}', '{$entry.is_main}')" src={$entry.image_url} width='100px'>
                         </span>
                     {/foreach}
                 </div>
             </div>
 
             <div class="edit_content">
-                <div class="edit_question">Upload New Photo:</div><p><input type="file" name="photoPath" value="{echo var='photoPath'}"></p>
+                <div class="edit_question">Upload New Image:</div><p><input type="file" name="photoPath" value="{echo var='photoPath'}"></p>
             </div>
 
             <br/>

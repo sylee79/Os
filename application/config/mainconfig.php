@@ -10,4 +10,7 @@ if (defined ( "DOMAIN" )) {
 } else {
 	die('Unable to configure platform');
 }
-$config['dummy'] = '';
+$config['enduser_url'] = 'http://littleprecious.comeze.com';
+$config['enduser_product_url'] = $config['enduser_url'].'/product';
+
+

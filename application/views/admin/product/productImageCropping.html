@@ -1,0 +1,33 @@
+    <span class="wide_content">
+        <form action="/admin/product" method="post">
+        <div class="edit">
+            <p class="edit_title">Product Image Cropping</p>
+            <div class="message">{echo var='message'}</div><br/><br/>
+            <input type="hidden" {init name='product_id'}>
+            
+            <div class="edit_wide_content">
+                <div class="edit_crop_preview">
+                    <div class="show_small_preview">
+                        <img src="{echo var='temp_image'}" width='225px' height='180px' id="preview">
+                    </div>
+                </div>
+                <input type="hidden" {init name='temp_image'}>
+                <div class="show_precrop_photo">
+                    <img src="{echo var='temp_image'}"  width="{echo var=image_width}" id="cropbox">
+					<input type="hidden" id="x" name="x" value="" />
+					<input type="hidden" id="y" name="y" value="" />
+					<input type="hidden" id="w" name="w" value="" />
+					<input type="hidden" id="h" name="h" value="" />
+                </div>
+            </div>
+            
+            <br/>           
+            <div class="edit_save_b"><input name="action" type="submit" value="save image">
+                                    <input name="action" type="submit" value="cancel image"> 
+            </div>
+            <br/>
+            <br/>
+        </div>
+        </form>
+       
+    </span>

@@ -21,6 +21,10 @@ require_once('Constants.php');
 
 class LibEnuser{
     function __construct(){
+    }
+    function getNewArrival(){
 
     }
+
+
 }
