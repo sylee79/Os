@@ -2,3 +2,4 @@
 .idea/
 .idea/*
 application/cache/*
+application/logs/*

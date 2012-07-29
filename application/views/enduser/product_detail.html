@@ -2,71 +2,45 @@
 
     <div id="main">
         <div id="content">
+            <div class="product_main_details">
+                <table>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img id='main_preview_image' title="{$mainImage.description}" src="{$mainImage.image_url}" alt="" width="480" height="384"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {foreach $productImages as $entry}
+                                            <img onClick="otherImageClick('{$entry.image_url}')" id='other_image' title="{$entry.description}" src="{$entry.image_url}" alt="" width="96" height="77"/>
+                                        {/foreach}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <div class="product_main_title">
+                                <p>{$product.title_en}</p>
+                            </div>
+                            <div class="product_description">
+                                <p>{$product.description_en}</p>
+                            </div>
+                            <div class="product_price">
+                                Price: SGD{$product.price}
+                            </div>
+                            <br/>
+                            {foreach $productVariation as $entry}
+                                <div class="product_variation">
+                                    {$entry.variation_type_en} : {$entry.variation_value_en}
+                                </div>
+                            {/foreach}
 
-
-            <h1><a href="http://lollipopsweet.com/bottoms-l118.xhtml" rel="bookmark"
-                   title="Permanent Link to Bottoms-L118">Bottoms-L118</a></h1>
-
-            <span class="postmetadata">By <a href="http://lollipopsweet.com/author/peiyilin" title="Posts by Leonchan"
-                                             rel="author">Leonchan</a> on June 11, 2012 2:53 pm on <a
-                    href="http://lollipopsweet.com/category/clothes/bottoms" title="View all posts in Bottoms"
-                    rel="category tag">Bottoms</a>, <a href="http://lollipopsweet.com/category/clothes"
-                                                       title="View all posts in Women"
-                                                       rel="category tag">Women</a> </span>
-
-            <div class="postcontent">
-
-
-                <span class="fb_share"><fb:like href="http://lollipopsweet.com/bottoms-l118.xhtml"
-                                                layout="button_count"></fb:like></span>
-                <fb:like href='http://lollipopsweet.com/bottoms-l118.xhtml' send='false' layout='button_count'
-                         show_faces='true' width='450' height='65' action='like' colorscheme='light'
-                         font='lucida+grande'></fb:like>
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/t.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7716" title="t"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/t.png" alt="" width="366"
-                        height="358"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T6.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7732" title="T6"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T6.png" alt="" width="783"
-                        height="635"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T8.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7736" title="T8"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T8.png" alt="" width="787"
-                        height="746"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T2.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7723" title="T2"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T2.png" alt="" width="788"
-                        height="481"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T4.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7727" title="T4"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T4.png" alt="" width="790"
-                        height="629"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T10.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7740" title="T10"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T10.png" alt="" width="794"
-                        height="740"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T12.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7745" title="T12"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T12.png" alt="" width="795"
-                        height="699"/></a></p>
-
-                <p><a href="http://lollipopsweet.com/wp-content/uploads/2012/06/T14.png" rel="lightbox[7703]"><img
-                        class="alignnone size-full wp-image-7750" title="T14"
-                        src="http://lollipopsweet.com/wp-content/uploads/2012/06/T14.png" alt="" width="795"
-                        height="608"/></a></p>
-
-                <p>Price: 25 SGD<br/>
-                    Color: orange, khaki, black<br/>
-                    Size: Free Size<br/>
-                    M: Waist: 76cm, hips: 94cm, Length: 29cm<br/>
-                    L: Waist: 80cm, hips: 96cm, Length: 30cm</p>
+                        </td>
+                    </tr>
+                </table>
 
 
                 <div class="cleaner">&nbsp;</div>
@@ -81,9 +55,9 @@
 
             <!-- If comments are open, but there are no comments. -->
             <div id="commentspost">
-                <h2 class="title">0 Comments</h2>
+                <!--<h2 class="title">0 Comments</h2>-->
 
-                <p>You can be the first one to leave a comment.</p>
+                <!--<p>You can be the first one to leave a comment.</p>-->
             </div>
 
 
@@ -102,10 +76,10 @@
                         <div id="comment-user-details">
                             <div id="alt-login-methods">
                                 <p>
-                                    <fb:login-button v="2" scope="email,user_website,publish_stream"
-                                                     onlogin="sfc_update_user_details();">
-                                        <fb:intl>Connect with Facebook</fb:intl>
-                                    </fb:login-button>
+                                    <!--<fb:login-button v="2" scope="email,user_website,publish_stream"-->
+                                                     <!--onlogin="sfc_update_user_details();">-->
+                                        <!--<fb:intl>Connect with Facebook</fb:intl>-->
+                                    <!--</fb:login-button>-->
                                 </p>
                             </div>
                             <label for="author">Name (required):</label>

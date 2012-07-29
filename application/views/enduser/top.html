@@ -1,57 +1,43 @@
 <div class="wrapper">
+    <a href="{$BASEURL}" onclick="cartClick()"><img src="{$BASEURL}res/enduser/images/cart_button.png" alt="Little Precious House"/></a>
     <div id="header">
         <div id="logo">
-            <a href="http://littleprecious.comeze.com/"><img src="res/enduser/images/logo.png"
+            <a href="{$BASEURL}"><img src="{$BASEURL}res/enduser/images/logo.png"
                                                              alt="Little Precious House"/></a>
         </div>
         <!-- end #logo -->
         <div id="menu" class="dropdown">
             <ul id="nav" class="dropdown">
                 <li id="menu-item-69"
-                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-69">
-                    <a href="http://littleprecious.comeze.com/">HOME</a></li>
-                <li id="menu-item-7" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7"><a
-                        href="http://littleprecious.comeze.com/order">ORDER</a></li>
+                    class="menu-item menu-item-type-custom menu-item-object-custom {if $menu==1}current-menu-item{/if} current_page_item menu-item-home menu-item-69">
+                    <a href="{$BASEURL}">HOME</a></li>
+                <li id="menu-item-7" class="menu-item menu-item-type-post_type {if $menu==2}current-menu-item{/if} menu-item-object-page menu-item-7"><a
+                        href="{$BASEURL}order/orderDetails">ORDER</a></li>
                 <li id="menu-item-70"
-                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-70">
-                    <a href="http://littleprecious.comeze.com/category/clothes">CLOTHES</a>
+                    class="menu-item menu-item-type-taxonomy menu-item-object-category {if $menu==3}current-menu-item{/if} menu-item-1">
+                    <a href="{$BASEURL}catalogue/category/1">CLOTHES</a>
                     <ul class="sub-menu">
-                        <li id="menu-item-13"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-13"><a
-                                href="http://littleprecious.comeze.com//category/clothes/tops">Tops</a></li>
-                        <li id="menu-item-9"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9"><a
-                                href="http://littleprecious.comeze.com//category/clothes/bottoms">Bottoms</a></li>
-                        <li id="menu-item-10"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10"><a
-                                href="http://littleprecious.comeze.com/category/clothes/dresses">Dresses</a></li>
-                        <li id="menu-item-800"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-800"><a
-                                href="http://littleprecious.comeze.com/category/clothes/dinner-gown">Gowns</a></li>
-                        <li id="menu-item-4033"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4033"><a
-                                href="http://littleprecious.comeze.com/category/clothes/shoes">Shoes</a></li>
+                        <li id="menu-item-4"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4"><a
+                                href="{$BASEURL}catalogue/category/4">For Girls</a></li>
+                        <li id="menu-item-5"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5"><a
+                                href="{$BASEURL}catalogue/category/5">For Boys</a></li>
+                        <li id="menu-item-6"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6"><a
+                                href="{$BASEURL}catalogue/category/6">For All</a></li>
                     </ul>
                 </li>
-                <li id="menu-item-12"
-                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12">
-                    <a href="http://littleprecious.comeze.com/category/men-clothing">TOYS</a>
-                    <ul class="sub-menu">
-                        <li id="menu-item-808"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-808"><a
-                                href="http://littleprecious.comeze.com/category/men-clothing/tops-men-clothing">T-Shirt</a>
-                        </li>
-                        <li id="menu-item-807"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-807"><a
-                                href="http://littleprecious.comeze.com/category/men-clothing/dresses-men-clothing">Jacket</a>
-                        </li>
-                    </ul>
+                <li id="menu-item-2"
+                    class="menu-item menu-item-type-taxonomy menu-item-object-category {if $menu==4}current-menu-item{/if} menu-item-2">
+                    <a href="{$BASEURL}catalogue/category/2">TOYS</a>
                 </li>
-                <li id="menu-item-8"
-                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8"><a
-                        href="http://littleprecious.comeze.com/category/accessories">ACCESSORIES</a></li>
+                <li id="menu-item-3"
+                    class="menu-item menu-item-type-taxonomy menu-item-object-category {if $menu==5}current-menu-item{/if} menu-item-3"><a
+                        href="{$BASEURL}catalogue/category/3">OTHER</a></li>
             </ul>
         </div>
+
         <div class="cleaner">&nbsp;</div>
     </div>
     <!-- end #header -->

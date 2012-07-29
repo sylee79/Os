@@ -33,7 +33,7 @@ class admin extends baseadmincontroller {
                 $data['selectionCategory'] = $this->libadmin->getProductCategory();
                 $data['selectionPriority'] = $this->libadmin->getPriorityList();
                 $data['productVariation'] = $this->libadmin->getDefaultVariation();
-                $data['productVariationJson'] = urlencode(json_encode($data['productVariation'],true));
+                $data['productVariationJson'] = urlencode(json_encode($data['productVariation']));
                 if(!isset($data['priority'])) $data['priority']=10;
                 $this->render('product/createProduct', $data);
                 break;
@@ -45,7 +45,7 @@ class admin extends baseadmincontroller {
 
             case 'create & add image':
                 $product = $this->libadmin->createProduct($this->myUser(), $_POST, json_decode(urldecode($_POST['product_variation_json']), true));
-                $this->product('edit_image', $product->id);
+                $this->product('edit image', $product->id);
                 break;
 
             case 'updateImageDesc':
@@ -130,8 +130,8 @@ class admin extends baseadmincontroller {
                 $data['selectionPriority'] = $this->libadmin->getPriorityList();
                 $this->libadmin->mergeData($data, $_POST);
                 $data['productVariation'] = $this->libadmin->addVariation($data);
-                $data['productVariationJson'] = urlencode(json_encode($data['productVariation'],true));
-                if($_POST['product_id']){
+                $data['productVariationJson'] = urlencode(json_encode($data['productVariation']));
+                if(isset($_POST['product_id'])){
                     $data['id']=$this->input->post('product_id');
                     $this->render('product/editProduct', $data);
                 }
@@ -145,8 +145,8 @@ class admin extends baseadmincontroller {
                 $data['selectionPriority'] = $this->libadmin->getPriorityList();
                 $this->libadmin->mergeData($data, $_POST);
                 $data['productVariation'] = $this->libadmin->removeVariation($data);
-                $data['productVariationJson'] = urlencode(json_encode($data['productVariation'],true));
-                if($_POST['product_id']){
+                $data['productVariationJson'] = urlencode(json_encode($data['productVariation']));
+                if(isset($_POST['product_id'])){
                     $data['id']=$this->input->post('product_id');
                     $this->render('product/editProduct', $data);
                 }
@@ -164,7 +164,7 @@ class admin extends baseadmincontroller {
                 }
                 $this->libadmin->mergeData($data, $product);
                 $data['productVariation'] = $this->libadmin->getProductVariation($id);
-                $data['productVariationJson'] = urlencode(json_encode($data['productVariation'],true));
+                $data['productVariationJson'] = urlencode(json_encode($data['productVariation']));
                 $this->render('product/editProduct', $data);
                 return;
 

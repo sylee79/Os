@@ -71,7 +71,7 @@ if (0) {
 		$folder = "enduser";
 //	}
 	
-	$route["default_controller"] = "$folder/enduser";
+	$route["default_controller"] = "$folder/main";
 
 	$requestUri = $_SERVER["REQUEST_URI"];
 	$requestToks = strtok($requestUri, "/");

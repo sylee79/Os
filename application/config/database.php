@@ -49,7 +49,9 @@ $active_group = 'sc_dev';
 $active_record = TRUE;
 
 $db_domain_mapping = array(
-    'sc.local:8585' => 'sc_dev',
+    'test.local:80' => 'sc_dev',
+    'test.local:8585' => 'sc_dev',
+    'littleprecious.comeze.com:80' => 'sc_dev',
 
 );
 
@@ -64,7 +66,7 @@ if (isset($_SERVER) && array_key_exists('HTTP_HOST', $_SERVER)) {
 		die("Unable to configure database");
 	}
 }
-$db['sc_dev']['hostname'] = 'dev.yuuzoo.com';
+$db['sc_dev']['hostname'] = '122.248.214.232';
 $db['sc_dev']['username'] = 'tester';
 $db['sc_dev']['password'] = 'tester123';
 $db['sc_dev']['database'] = 'testdb';

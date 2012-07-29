@@ -1,0 +1,14 @@
+.product_main_details { margin-right: 10px; }
+.product_main_title {}
+.product_main_title p {
+	font-size: 28px;
+	font-weight: bold;
+    color: black;
+    margin-top: 0;
+}
+.product_description { font-size: 16px; color:grey;}
+.product_variation { font-size: 16px; color:grey;}
+.product_price { font-size: 16px; color:grey;}
+
+
+.postcontent table, th, td{border: 1px; vertical-align:top;}

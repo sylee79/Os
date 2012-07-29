@@ -114,8 +114,8 @@ class LibAdmin
         return false;
     }
 
-    function setMainPreview($product, $imageId){
-        $q = 'update product_image set is_main = 0; update product_image set is_main = 1 where id = '.$imageId;
+    function setMainPreview($productId, $imageId){
+        $q = 'update product_image set is_main = 0 where product_id = '.$productId.'; update product_image set is_main = 1 where id = '.$imageId;
         return $this->getDBData($q, false);
     }
 
@@ -128,6 +128,17 @@ class LibAdmin
 
 			$productImage->image_url = $destFile;
 			$productImage->save();
+
+            $q = "select id from product_image where product_id = $id and is_main = 1 and image_url like '%default.jpg'";
+
+            $result = $this->getDBData($q);
+
+            if(is_array($result) && count($result)>0){
+                $productImage->is_main = 1;
+                $productImage->save();
+                $q = "delete from product_image where id = ".$result[0]['id'];
+                $this->getDBData($q, false);
+            }
 
 			return true;
 		}catch(Exception $e){

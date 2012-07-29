@@ -8,7 +8,13 @@ class wildcard_controller extends baseendusercontroller {
 		parent::__construct();
 	}
 
-	public function index()	{
-		echo "Hello End User WILDCARD controller";
+	public function index($params=false)	{
+		echo "Hello End User WILDCARD controller $params";
 	}
+
+    public function orderDetails(){
+        $data = array();
+        $this->render('order', $data);
+    }
+
 }

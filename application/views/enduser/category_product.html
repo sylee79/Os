@@ -1,0 +1,32 @@
+<div class="wrapper">
+
+    <div id="content">
+
+        <div style="color:#000000; font-size:20px">{$category_title}</div>
+
+        <ul class="posts">
+            {foreach $productList as $entry}
+            <li>
+                <h2><a href="{$entry.productLink}"
+                       title="{$entry.title_en}">{$entry.title_en}</a></h2>
+
+                <div class="content">
+                    <a href="{$entry.productLink}" rel="bookmark"
+                       title="{$entry.title_en}"><img
+                            src="{$entry.image_url}"
+                            alt="{$entry.title_en}"/></a>
+
+                    <p>Price: SGD{$entry.price}
+                        <br/>Category: {$entry.category_name_en}
+                    </p>
+
+                    <div class="cleaner">&nbsp;</div>
+                </div>
+            </li>
+
+            {/foreach}
+        </ul>
+    </div>
+    <!-- end #content -->
+</div>
+<!-- end .wrapper -->

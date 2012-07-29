@@ -41,11 +41,18 @@ input { padding:5px; margin-right:4px;}
 
 #container {width:100%; min-height: 200px; margin: 0 auto; text-align:center; font-size: 13px; line-height: 1.5; }
 #container div.wrapper {margin: 0 auto; width: 950px; text-align: left; padding: 0; }
+#container div.wrapper a{margin: 0 0 0 0; float: right; }
 #container div.cleaner {clear: both; font-size:1px; height: 1px; margin:0; line-height: 1px; }
 #container div.sep {font-size:1px; height: 1px; margin:0; line-height: 1px; margin: 2px 0; border-bottom: dotted 1px #58626a; }
 
 #header {padding: 20px 0; border-bottom: solid 2px #58626a; margin: 25px 0 15px; }
-#logo {float: left; display: inline; }
+/*logo {float: left; display: inline;}*/
+#logo {
+  float: left;
+  display: inline;
+  position:absolute;
+  top:-3%;
+  }
 
 #nav {display: inline-block; margin: 20px 0 0; float: right; }
 #nav li {float: left; display: inline; font-size: 16px; font-weight: bold; padding: 6px 12px; -moz-border-radius: 15px; -khtml-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px;}
@@ -62,7 +69,7 @@ input { padding:5px; margin-right:4px;}
 .container { overflow:hidden; position:relative; }
 .slides { position:absolute; top:0; left:0; }
 .slides li.slide { position:absolute; top:0; width:950px; min-height: 400px; display:none; }
-.postcontent {  overflow:hidden;}
+
 /* Optional */
 
 a.previous { position: absolute; top: 38%; left: -5px; }
@@ -78,8 +85,9 @@ a.next:hover { background-position: -45px 0; }
 
 #content {margin-top: 20px; }
 #content ul.posts {margin: 15px 0 15px 0; }
-#content ul.posts li { float: left; display: inline; margin-right: 10px; width:300px; padding: 5px; }
-#content ul.posts li a {color:#000000;}
+#content ul.posts li { float: left; display: inline; margin-right: 10px; width:280px; padding: 5px; }
+#content ul.posts li a {color:#000000; padding-top: 15px;}
+#content ul.posts li img {width:280px; height:224px;}
 #content ul.posts li.last {margin-right: 0; }
 #content ul.posts h2 {margin: 10px 0; font-size: 14px; line-height: 1.3; font-weight: bold; display: block; padding-bottom: 6px; border-bottom: solid 2px #58626a; }
 #content ul.posts img {margin: 1px 0 10px; }
