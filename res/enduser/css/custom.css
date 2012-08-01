@@ -12,3 +12,32 @@
 
 
 .postcontent table, th, td{border: 1px; vertical-align:top;}
+
+.cart_details { margin-right: 10px; }
+.cart_details table {
+    width:90%;
+    border-top:1px solid #e5eff8;
+    border-right:1px solid #e5eff8;
+    margin:1em auto;
+    border-collapse:collapse;
+}
+.cart_details td {
+    color:#678197;
+    border-bottom:1px solid #e5eff8;
+    border-left:1px solid #e5eff8;
+    padding:.3em 1em;
+    text-align:center;
+}
+
+.cart_details tr.odd td {
+    background:#f7fbff
+}
+.cart_details tr.odd .column1 {
+    background:#f4f9fe;
+}
+.cart_details .column1 {
+    background:#f9fcfe;
+    font:bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color:#66a3d3;
+}
+

@@ -1,3 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+{include file='enduser/header.html'}
+
+<body>
+<div id="container">
+    {include file='enduser/top.html'}
+
 <div class="wrapper">
 
     <div id="main">
@@ -32,11 +40,23 @@
                                 Price: SGD{$product.price}
                             </div>
                             <br/>
+
+                            <form method="post" action="/user/add2Cart" id="add_to_cart">
+                            <input type="hidden" name="product_id" value="{$product.id}">
                             {foreach $productVariation as $entry}
-                                <div class="product_variation">
-                                    {$entry.variation_type_en} : {$entry.variation_value_en}
-                                </div>
+                                    {$entry.variation_type_en}:
+                                        <select name="variation_{$entry.variation_type_en}">
+                                            {foreach $entry.variation_value_en as $var}
+                                                <option value="{$var}">{$var}</option>
+                                            {/foreach}
+                                        </select>
                             {/foreach}
+                            <br/><br/>
+
+                            Quantity: <input name="quantity" value="1">
+                            <br/><br/>
+                            <input type="submit" value="Add to Cart">
+                            </form>
 
                         </td>
                     </tr>
@@ -61,52 +81,52 @@
             </div>
 
 
-            <div id="respond">
-                <h2 class="title">Leave a Comment</h2>
+            <!--<div id="respond">-->
+                <!--<h2 class="title">Leave a Comment</h2>-->
 
-                <div class="cleaner">&nbsp;</div>
-                <div class="cancel-comment-reply"><p><a rel="nofollow" id="cancel-comment-reply-link"
-                                                        href="/bottoms-l118.xhtml#respond" style="display:none;">Click
-                    here to cancel reply.</a></p></div>
+                <!--<div class="cleaner">&nbsp;</div>-->
+                <!--<div class="cancel-comment-reply"><p><a rel="nofollow" id="cancel-comment-reply-link"-->
+                                                        <!--href="/bottoms-l118.xhtml#respond" style="display:none;">Click-->
+                    <!--here to cancel reply.</a></p></div>-->
 
 
-                <form action="http://lollipopsweet.com/wp-comments-post.php" method="post" id="commentform">
+                <!--<form action="http://lollipopsweet.com/wp-comments-post.php" method="post" id="commentform">-->
 
-                    <div id="formLabels">
-                        <div id="comment-user-details">
-                            <div id="alt-login-methods">
-                                <p>
-                                    <!--<fb:login-button v="2" scope="email,user_website,publish_stream"-->
-                                                     <!--onlogin="sfc_update_user_details();">-->
-                                        <!--<fb:intl>Connect with Facebook</fb:intl>-->
-                                    <!--</fb:login-button>-->
-                                </p>
-                            </div>
-                            <label for="author">Name (required):</label>
-                            <input type="text" name="author" id="author" value="" size="22" tabindex="1"
-                                   aria-required='true'/><br/>
+                    <!--<div id="formLabels">-->
+                        <!--<div id="comment-user-details">-->
+                            <!--<div id="alt-login-methods">-->
+                                <!--<p>-->
+                                    <!--&lt;!&ndash;<fb:login-button v="2" scope="email,user_website,publish_stream"&ndash;&gt;-->
+                                                     <!--&lt;!&ndash;onlogin="sfc_update_user_details();">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<fb:intl>Connect with Facebook</fb:intl>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</fb:login-button>&ndash;&gt;-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<label for="author">Name (required):</label>-->
+                            <!--<input type="text" name="author" id="author" value="" size="22" tabindex="1"-->
+                                   <!--aria-required='true'/><br/>-->
 
-                            <label for="email">E-Mail (required):</label>
-                            <input type="text" name="email" id="email" value="" size="22" tabindex="2"
-                                   aria-required='true'/><br/>
+                            <!--<label for="email">E-Mail (required):</label>-->
+                            <!--<input type="text" name="email" id="email" value="" size="22" tabindex="2"-->
+                                   <!--aria-required='true'/><br/>-->
 
-                            <label for="url">Website:</label>
-                            <input type="text" name="url" id="url" value="" size="22" tabindex="3"/><br/></div>
-                    </div>
-                    <div id="formContent">
-                        <label for="comment">Comment:</label>
-                        <textarea name="comment" id="comment" tabindex="4" cols="140" rows="8"></textarea><br/>
-                        <input name="submit" type="submit" id="submit" value="Add Comment"/>
-                    </div>
-                    <div class="cleaner">&nbsp;</div>
-                    <input type='hidden' name='comment_post_ID' value='7703' id='comment_post_ID'/>
-                    <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+                            <!--<label for="url">Website:</label>-->
+                            <!--<input type="text" name="url" id="url" value="" size="22" tabindex="3"/><br/></div>-->
+                    <!--</div>-->
+                    <!--<div id="formContent">-->
+                        <!--<label for="comment">Comment:</label>-->
+                        <!--<textarea name="comment" id="comment" tabindex="4" cols="140" rows="8"></textarea><br/>-->
+                        <!--<input name="submit" type="submit" id="submit" value="Add Comment"/>-->
+                    <!--</div>-->
+                    <!--<div class="cleaner">&nbsp;</div>-->
+                    <!--<input type='hidden' name='comment_post_ID' value='7703' id='comment_post_ID'/>-->
+                    <!--<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>-->
 
-                    <p style="display: none;"><input type="hidden" id="akismet_comment_nonce"
-                                                     name="akismet_comment_nonce" value="3daf8c610f"/></p>
+                    <!--<p style="display: none;"><input type="hidden" id="akismet_comment_nonce"-->
+                                                     <!--name="akismet_comment_nonce" value="3daf8c610f"/></p>-->
 
-                    <p id="sfc_comm_send"></p></form>
-            </div>
+                    <!--<p id="sfc_comm_send"></p></form>-->
+            <!--</div>-->
 
 
         </div>
@@ -123,4 +143,8 @@
 
 </div>
 <!-- end .wrapper -->
-
+    {include file='enduser/bottom.html'}
+</div>
+<!-- end #container -->
+</body>
+</html>

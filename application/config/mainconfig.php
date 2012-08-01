@@ -17,6 +17,7 @@ if (defined ( "DOMAIN" )) {
 	die('Unable to configure platform');
 }
 //$config['enduser_url'] = 'http://littleprecious.comeze.com/';
+$config['ajax_loader'] = 'res/enduser/images/ajax_280.gif';
 $config['enduser_product_url'] = $config['enduser_url'].'catalogue/product/';
 
 

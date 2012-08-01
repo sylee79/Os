@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <a href="{$BASEURL}" onclick="cartClick()"><img src="{$BASEURL}res/enduser/images/cart_button.png" alt="Little Precious House"/></a>
+    <a class="cart" href="{$BASEURL}user/showcart" >{if $cartCount}({$cartCount}){/if}</a>
     <div id="header">
         <div id="logo">
             <a href="{$BASEURL}"><img src="{$BASEURL}res/enduser/images/logo.png"

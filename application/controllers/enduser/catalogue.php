@@ -17,8 +17,15 @@ class catalogue extends baseendusercontroller {
         }
         $data['productImages']=$this->libenduser->getProductImages($data['product']['id']);
         $data['mainImage']=$data['productImages'][0];
-        $data['productVariation']=$this->libenduser->getProductVariation($data['product']['id']);
-		$this->render('product', $data);
+        $variation=$this->libenduser->getProductVariation($data['product']['id']);
+        $data['productVariation']=array();
+        foreach($variation as $entry){
+            if($entry['variation_type_en'] === 'standard' && $entry['variation_value_en'] === 'standard') continue;
+            array_push($data['productVariation'], array( 'id' => $entry['id']
+                                                        ,'variation_type_en'=>$entry['variation_type_en']
+                                                        , 'variation_value_en'=>explode(',', $entry['variation_value_en'])));
+        }
+		$this->render('product_detail', $data);
 	}
 
     public function category($categoryId){
@@ -27,7 +34,7 @@ class catalogue extends baseendusercontroller {
         $this->libenduser->getCategoryProduct($data, $categoryId);
 		$this->render('category', $data);
     }
-	
+
 	public function notFound() {
 		echo "Login enduser controller";
 	}

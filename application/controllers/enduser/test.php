@@ -15,6 +15,7 @@ class test extends baseendusercontroller{
     }
 
     function test1(){
-        echo "test start";
     }
+
+
 }

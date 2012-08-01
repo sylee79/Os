@@ -22,6 +22,8 @@
     <script type='text/javascript'
             src='{$BASEURL}res/enduser/js/lightbox.js?ver=1.8'></script>
     <script type='text/javascript' src='{$BASEURL}res/enduser/js/jquery.js?ver=1.6.1'></script>
+    <script type='text/javascript' src='{$BASEURL}res/enduser/js/jail.0.9.5.js'></script>
+    <script type='text/javascript' src='{$BASEURL}res/enduser/js/var_dump.js'></script>
     <link rel='index' title='Little Precious House' href='{$BASEURL}'/>
 
     <script src='/res/admin/image/js/jquery.Jcrop.min.js'></script>
@@ -30,16 +32,20 @@
                 document.getElementById('main_preview_image').src = newMainImage;
             }
 
-
-            function cartClick(){
-                alert("cartClick");
-            }
         </script>
     <!-- begin lightbox scripts -->
     <script type="text/javascript">
         //<![CDATA[
 //        document.write('<link rel="stylesheet" href="{$BASEURL}wp-content/plugins/lightbox-2/Themes/White/lightbox.css" type="text/css" media="screen" />');
         //]]>
+    </script>
+
+    <script>
+    jQuery(document).ready(function ($) {
+    $(function(){
+        $('.lazy').jail();
+    });
+    });
     </script>
     <!-- end lightbox scripts -->
     <meta property='og:type' content='blog'/>
@@ -51,7 +57,7 @@
         display: inline !important;
         padding: 0 !important;
         margin: 0 !important;
-    }</style>
+    }</style
 
     <script type="text/javascript" src="{$BASEURL}res/enduser/js/dropdown.js"></script>
     <script type="text/javascript" src="{$BASEURL}res/enduser/js/loopedslider.min.js"></script>

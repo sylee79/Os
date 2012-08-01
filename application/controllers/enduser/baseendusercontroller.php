@@ -7,6 +7,7 @@ class baseendusercontroller extends basewebappcontroller {
 	function __construct() {
 		parent::__construct();
         $this->load->library('LibEndUser');
+        $this->load->library('LibCart');
 	}
 
 	protected function _render($page, &$data = array(), $returnAsString = false) {
@@ -16,7 +17,10 @@ class baseendusercontroller extends basewebappcontroller {
 
     private function initRender(&$data, $page){
         $config =& get_config();
+
+        $data['cartCount']=$this->libcart->getCartCount();
         $data['BASEURL']=$config['base_url'];
+        $data['ajax_loader']=$data['BASEURL'].$config['ajax_loader'];
         switch($page){
             case 'main':
                 $data['menu']=1;
