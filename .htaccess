@@ -3,3 +3,22 @@ RewriteEngine on
 RewriteCond %{REQUEST_URI} !=/server-status
 RewriteCond $1 !^(ga\.php|index\.php|xajax_js|res|robots\.txt|2016119\.html)
 RewriteRule ^(.*)$ /index.php/$1 [L]
+
+#cache html and htm files for one day  
+<FilesMatch ".(html|htm)$">  
+Header set Cache-Control "max-age=43200, public"  
+</FilesMatch>  
+  
+#cache css, javascript and text files for one week  
+<FilesMatch ".(js|css|txt)$">  
+Header set Cache-Control "max-age=604800, public"  
+</FilesMatch>  
+  
+#cache flash and images for one month  
+<FilesMatch ".(flv|swf|ico|gif|jpg|jpeg|png)$">  
+Header set Cache-Control "max-age=2592000, public"  
+</FilesMatch>  
+  
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css text/javascript application/x-javascript application/javascript
+</ifmodule>

@@ -125,6 +125,29 @@ class Common{
 
         return BASEPATH."../".$destFile;
     }
+
+    static function startBenchmark($functionName){
+        $CI =& get_instance();
+        $CI->benchmark->mark($functionName.'_start');
+    }
+
+    static function endBenchmark($functionName, $isCache=false, $ref=false, $minIgnoredElapsed=50, $isEcho=false){
+        $CI =& get_instance();
+        $CI->benchmark->mark($functionName.'_end');
+
+        $elapsedTime = $CI->benchmark->elapsed_time($functionName.'_start', $functionName.'_end')*1000;
+        $benchMarkName = false;
+        if($isCache){
+            $benchMarkName = $functionName.'-CACHE';
+        }else{
+            $benchMarkName = $functionName;
+        }
+        if ($elapsedTime > $minIgnoredElapsed) {
+            _d('BENCHMARK[' . $benchMarkName . ']:' . $elapsedTime . "ms");
+            if($isEcho)
+                echo ('BENCHMARK[' . $benchMarkName . ']:' . $elapsedTime . "ms");
+        }
+    }
 }
 
 class SimpleImage {

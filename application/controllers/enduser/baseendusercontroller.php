@@ -10,7 +10,7 @@ class baseendusercontroller extends basewebappcontroller {
         $this->load->library('LibCart');
 	}
 
-	protected function _render($page, &$data = array(), $returnAsString = false) {
+	 function _render($page, &$data = array(), $returnAsString = false) {
 		$data['subsystem'] = 'enduser';
 		parent::_render($page, $data, $returnAsString);
 	}
@@ -46,11 +46,13 @@ class baseendusercontroller extends basewebappcontroller {
         }
     }
 
-    protected function render($page, $data = array())
+    protected function render($page, $data = array(), $returnAsString=false)
     {
         $this->initRender($data, $page);
+        if($returnAsString)
+            return $this->parser->parse("enduser/$page.html", $data, true);
         $this->parser->parse("enduser/$page.html", $data);
-        return;
+        return '';
     }
 
 

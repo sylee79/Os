@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+{include file='enduser/header.html'}
+
+<body>
+<div id="container">
+    {include file='enduser/top.html'}
+
+    <div class="wrapper">
+
+        <div id="main">
+            <div id="content">
+                <div id="respond">
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $(function(){
+                                $('#checkoutform').validate();
+                            });
+
+                        });
+                    </script>
+
+                    <form action="/user/checkout_step2" method="post" id="checkoutform">
+
+                        <div id="formLabels">
+                            <div id="user-details">
+                                <div id="alt-login-methods">
+                                    <p>
+                                        <!--<fb:login-button v="2" scope="email,user_website,publish_stream"-->
+                                        <!--onlogin="sfc_update_user_details();">-->
+                                        <!--<fb:intl>Connect with Facebook</fb:intl>-->
+                                        <!--</fb:login-button>-->
+                                    </p>
+                                </div>
+
+                                <br/>Please fill in the form below, we will prepare the order invoice for you:<br/><br/>
+                                <label for="buyer">Name (required):</label><input type="text" class="required" name="buyer" id="buyer" value="{if isset($buyer)}{$buyer}{/if}" size="22" tabindex="1"/><br/>
+
+                                <label for="email">E-Mail (required):</label>
+                                <input type="text" name="email" class="required email" id="email" value="{if isset($email)}{$email}{/if}" size="22" tabindex="2"/><br/>
+                                <label for="contact">Contact Number (required):</label>
+                                <input type="text" name="contact" id="contact" class="required" value="{if isset($contact)}{$contact}{/if}" size="22" tabindex="3"/><br/>
+                                <label for="address">Address(required):</label>
+                                <textarea name="address" id="address" class="required" tabindex="4" cols="35" rows="5">{if isset($address)}{$address}{/if}</textarea><br/><br/>
+
+                            </div>
+                            <div id="formContent">
+                                <label for="comment">Comment:</label>
+                                <textarea name="comment" id="comment" tabindex="5" cols="50" rows="8">{if isset($comment)}{$comment}{/if}</textarea><br/><br/>
+                                <input name="submit" type="submit" id="submit" class="submit" value="Checkout"/>
+                            </div>
+                            <div class="cleaner">&nbsp;</div>
+
+                            <p style="display: none;"></p>
+
+                            <p id="sfc_comm_send"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end #content -->
+
+        </div>
+        <!-- end #main -->
+        <div id="sidebar">
+
+
+            <div class="cleaner">&nbsp;</div>
+        </div>
+        <!-- end #sidebar -->
+
+    </div>
+    <!-- end .wrapper -->
+    {include file='enduser/bottom.html'}
+</div>
+<!-- end #container -->
+</body>
+</html>

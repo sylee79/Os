@@ -20,24 +20,35 @@
     border-right:1px solid #e5eff8;
     margin:1em auto;
     border-collapse:collapse;
+    text-align:center;
 }
 .cart_details td {
     color:#678197;
     border-bottom:1px solid #e5eff8;
     border-left:1px solid #e5eff8;
     padding:.3em 1em;
-    text-align:center;
+    text-align:right
 }
 
 .cart_details tr.odd td {
-    background:#f7fbff
+    background:#e5f4fd;
+    text-align:right
 }
 .cart_details tr.odd .column1 {
     background:#f4f9fe;
+    text-align:center;
 }
 .cart_details .column1 {
-    background:#f9fcfe;
+    background: #d0ecfd;
     font:bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
     color:#66a3d3;
+    text-align:center;
+}
+
+table.review {
+
+}
+table.review td {
+
 }
 

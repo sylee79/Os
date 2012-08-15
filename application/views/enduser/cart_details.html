@@ -15,17 +15,38 @@
                         <tr class='column1'>
                             <td></td><td>Title</td><td>Quantity</td><td>Price</td><td>Subtotal</td>
                         </tr>
+                        {if $cartCount > 0}
                         {foreach $items as $entry}
                         <tr {if $entry@iteration %2 eq 0}class='odd'{/if}>
-                            <td>{counter}</td><td>{$entry.title} {$entry.variation}</td><td>{$entry.quantity}</td><td>{$entry.price}</td><td>{$entry.subtotal}</td>
+                            <td>{counter}</td><td style="text-align: left">{$entry.title} {$entry.variation}</td><td>{$entry.quantity}</td><td>{$entry.price}</td><td>{$entry.subtotal}</td>
                         </tr>
                         {/foreach}
+                        <tr {if $entry@iteration %2 eq 1}class='odd'{/if}>
+                        <td colspan='4'>Total:</td><td>{$total}</td>
+                        </tr>
+                        {else}
+                        <tr>
+                        <td colspan='5' style="text-align: center">Your shopping cart is empty</td>
+                        </tr>
+                        {/if}
 
                     </table>
 
+                    {if $cartCount > 0}
+                    {section name=i start=16 loop=16 step=-1}
+                    {if $smarty.section.i.index > $cartCount}
+                    <br/>
+                    {/if}
+                    {/section}
+                    <form method="post" action="/user/checkout_step1">
+                        <input class="checkout" type="submit" name="checkout" value="Check Out">
+                        <input class="checkout" type="submit" name="clear" value="Clear Shopping Cart">
+                    </form>
+                    {else}
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    {/if}
 
                     <div class="cleaner">&nbsp;</div>
-
 
                 </div>
                 <!-- end .postcontent -->

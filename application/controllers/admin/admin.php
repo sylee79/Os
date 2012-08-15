@@ -24,7 +24,6 @@ class admin extends baseadmincontroller {
                 $this->product();
                 break;
 
-
             case 'create & new':
                 $product = $this->libadmin->createProduct($this->myUser(), $_POST, json_decode(urldecode($_POST['product_variation_json']), true));
 

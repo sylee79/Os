@@ -7,6 +7,7 @@ class basewebappcontroller extends CI_Controller {
 			define('CDN_PREFIX', '/res');
 		}
         $this->load->helper("clog");
+        $this->load->library("email");
         Doctrine_Manager::connection()->setCharset("utf8");
 	}
 

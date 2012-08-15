@@ -15,7 +15,7 @@ class cartItem{
                 $this->variations[$key]=$value;
             }
         }else{
-            $this->variatoins = NULL;
+            $this->variations = NULL;
         }
         $this->quantity = $quantity;
     }
@@ -32,6 +32,7 @@ class cartItem{
             return true;
         }
     }
+
 
     function adjust($productId, $variations, $quantity, $isAdding=false){
         if(is_array($variations)){
@@ -53,9 +54,11 @@ class cartItem{
 
 class cartSession{
     public $items;
+    public $count;
 
     function __construct(){
         $this->items = array();
+        $this->count = 0;
     }
 
     function add2Cart($productId, $variations, $quantity){
@@ -69,6 +72,7 @@ class cartSession{
             }
             //item not found
         }
+        ++$this->count;
         array_push($this->items[$productId], new cartItem($productId, $variations, $quantity));
         return true;
     }
@@ -81,6 +85,7 @@ class LibCart{
     function __construct(){
         $this->CI =& get_instance();
         $this->CI->load->library('Session');
+
     }
 
     function clearCart(){
@@ -88,9 +93,11 @@ class LibCart{
     }
 
     function getCartCount(){
+        Common::startBenchmark(__FUNCTION__);
         $cartSess = $this->CI->session->userdata("cart_session");
+        Common::endBenchmark(__FUNCTION__);
         if(!$cartSess) return 0;
-        return count($cartSess->items);
+        return $cartSess->count;
     }
 
     function add2Cart($productId, $variation, $quantity){
@@ -100,6 +107,24 @@ class LibCart{
         }
         $cartSess->add2Cart($productId, $variation, $quantity);
         $this->CI->session->set_userdata("cart_session", $cartSess);
+    }
+
+    function getUserDetails()
+    {
+        return $this->CI->session->userdata("user_details");
+    }
+
+    function saveUserDetails()
+    {
+        $userDetails = $this->CI->session->userData("user_details");
+        if(!$this->CI->input->post("buyer")) return $userDetails;
+        $userDetails['buyer'] = $this->CI->input->post("buyer");
+        $userDetails['email'] = $this->CI->input->post("email");
+        $userDetails['contact'] = $this->CI->input->post("contact");
+        $userDetails['address'] = $this->CI->input->post("address");
+        $userDetails['comment'] = $this->CI->input->post("comment");
+        $this->CI->session->set_userdata("user_details",$userDetails);
+        return $userDetails;
     }
 
     function getCartItems()
@@ -134,10 +159,41 @@ class LibCart{
             }
         }
 
-        return array('items'=>$retItems, 'total'=>$total);
+        return array('items'=>$retItems, 'total'=>number_format($total,2), 'count'=>$cartSess->count);
+    }
+
+	function sendEmail($to, $subject, $contentHTML) {
+		_d("SENDEMAIL: To [$to] Subject [$subject] Content [$contentHTML]");
+        $Config =& get_config();
+
+        $CI =& get_instance();
+        $CI->load->library('email');
+        $params['protocol']= 'smtp';
+        $params['smtp_host']='ssl://smtp.gmail.com';
+        $params['smtp_user']='littleprecious123@gmail.com';
+        $params['smtp_pass']='sPLp12143';
+        $params['smtp_port']=465;
+        $params['mailtype']='html';
+        $params['newline']="\n";
+        $params['charset']='utf-8';
+
+        $CI->email->initialize($params);
+        $CI->email->set_newline("\r\n");
+
+        $CI->email->from('littleprecious123@gmail.com', 'Little Precious');
+        $CI->email->to($to);
+        $CI->email->subject($subject);
+        $CI->email->message($contentHTML);
+        $ret = $CI->email->send();
+//        echo $CI->email->print_debugger();
+        return true;
+	}
+
+    function sendOrder(){
 
     }
-        function getDBData($query, $returnResult = true, $params = array(), $fetchMode=PDO::FETCH_ASSOC)
+
+    function getDBData($query, $returnResult = true, $params = array(), $fetchMode=PDO::FETCH_ASSOC)
     {
         try {
             $pdo = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();

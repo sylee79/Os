@@ -1,16 +1,72 @@
-<div class="wrapper">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+{include file='enduser/header.html'}
 
-    <div id="content">
+<body>
+<div id="container">
+    {if !isset($for_email)}
+    {include file='enduser/top.html'}
+    {/if}
 
-        <div style="color:#000000; font-size:20px">Order</div>
+    <div class="wrapper">
 
-        <ul class="posts">
-            <li>
+        <div id="main">
+            <div id="content">
+                <table style="border:1px solid; padding-right: 25px;">
+                    <tr>
+                        <td valign="top">
+                            Delivery to:<br/>
+                        </td>
+                        <td style="min-width: 150px;"><br/>
+                            <table>
+                                <tr><td align="right" style="padding-right:2px;">Name: </td><td>{$buyer}</td></tr>
+                                <tr><td align="right" style="padding-right:2px;">Address: </td><td>{$address}</td></tr>
+                                <tr><td align="right" style="padding-right:2px;">Email: </td><td>{$email}</td></tr>
+                                <tr><td align="right" style="padding-right:2px;">Contact: </td><td>{$contact}</td></tr>
+                                <tr><td align="right" style="padding-right:2px;">Comment: </td><td>{$comment}</td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table class="review" style="border: 2px outset black;border-collapse: collapse;background-color: rgb(250, 240, 230);">
+                    <!--<tr style="border:1px solid;"><td style="border:1px solid; min-width:300px">Title</td><td style="border:1px solid;">Quantity</td><td style="border:1px solid;">Price</td><td style="border:1px solid;">Subtotal</td></tr>-->
+                    <tr><td style="border: 2px outset grey;padding: 5px 15px;min-width:500px" align="center">Title</td><td style="border: 2px outset grey;padding: 5px 15px;min-width:80px" align="center">Quantity</td><td  style="border: 2px outset grey;padding: 5px 15px;min-width:80px" align="center">Price</td><td  style="border: 2px outset grey;padding: 5px 15px;min-width:80px" align="center">Subtotal</td></tr>
+                    {if $cartCount > 0}
+                    {foreach $items as $entry}
+                    <tr><td style="border: 2px outset grey;padding: 5px 15px;">{counter}. {$entry.title} {$entry.variation}</td><td style="border: 2px outset grey;padding: 5px 15px;" >{$entry.quantity}</td><td style="border: 2px outset grey;padding: 5px 15px;" >{$entry.price}</td><td style="border: 2px outset grey;padding: 5px 15px;min-width:80px" >{$entry.subtotal}</td></tr>
+                    {/foreach}
+                    <tr><td colspan="3" align="right">Total:</td><td>{$total}</td></tr>
+                    {/if}
+                </table>
 
-            </li>
+                <br/><br/>
+                <div align="center">
+                    {if !isset($for_email)}
+                    <input type="button" value="Print this page" onClick="window.print()">
+                    {/if}
 
-        </ul>
+                    <div class="cleaner">&nbsp;</div>
+                </div>
+                <!-- end .postcontent -->
+            </div>
+            <!-- end #content -->
+
+        </div>
+        <!-- end #main -->
+        <div id="sidebar">
+
+
+            <div class="cleaner">&nbsp;</div>
+        </div>
+        <!-- end #sidebar -->
+
     </div>
-    <!-- end #content -->
+    <!-- end .wrapper -->
+    {if !isset($for_email)}
+    {include file='enduser/bottom.html'}
+    {/if}
 </div>
-<!-- end .wrapper -->
+<!-- end #container -->
+</body>
+</html>

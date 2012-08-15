@@ -5,25 +5,28 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Little Precious House"/>
+    <meta http-equiv="last-modified" content="Tue, 31 Jul 2012 05:00:00 GMT" />
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="Public">
 
-
-    <link rel="stylesheet" type="text/css" href="{$BASEURL}res/enduser/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="{$BASEURL}res/enduser/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="{$BASEURL}res/enduser/css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
+    <link rel="stylesheet" type="text/css" href="{$BASEURL}res/enduser/css/custom.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 
     <link rel="stylesheet" href="{$BASEURL}res/enduser/css/dropdown.css" type="text/css"
           media="screen"/>
 
     <script type='text/javascript' src='{$BASEURL}res/enduser/js/l10n.js?ver=20101110'></script>
-    <script type='text/javascript' src='{$BASEURL}res/enduser/js/prototype.js?ver=1.6.1'></script>
+    <script type='text/javascript' src='{$BASEURL}res/enduser/js/prototype.min.js?ver=1.6.1'></script>
     <script type='text/javascript'
-            src='{$BASEURL}res/enduser/js/wp-scriptaculous.js?ver=1.8.3'></script>
+            src='{$BASEURL}res/enduser/js/wp-scriptaculous.min.js?ver=1.8.3'></script>
     <script type='text/javascript'
             src='{$BASEURL}res/enduser/js/effects.js?ver=1.8.3'></script>
     <script type='text/javascript'
-            src='{$BASEURL}res/enduser/js/lightbox.js?ver=1.8'></script>
-    <script type='text/javascript' src='{$BASEURL}res/enduser/js/jquery.js?ver=1.6.1'></script>
+            src='{$BASEURL}res/enduser/js/lightbox.min.js?ver=1.8'></script>
+    <script type='text/javascript' src='{$BASEURL}res/enduser/js/jquery.js?ver=1.61'></script>
+    <script type='text/javascript' src='{$BASEURL}res/enduser/js/jquery.validate-min.js?ver=1.9.2'></script>
     <script type='text/javascript' src='{$BASEURL}res/enduser/js/jail.0.9.5.js'></script>
     <script type='text/javascript' src='{$BASEURL}res/enduser/js/var_dump.js'></script>
+
     <link rel='index' title='Little Precious House' href='{$BASEURL}'/>
 
     <script src='/res/admin/image/js/jquery.Jcrop.min.js'></script>
@@ -38,13 +41,11 @@
         //<![CDATA[
 //        document.write('<link rel="stylesheet" href="{$BASEURL}wp-content/plugins/lightbox-2/Themes/White/lightbox.css" type="text/css" media="screen" />');
         //]]>
-    </script>
-
-    <script>
     jQuery(document).ready(function ($) {
     $(function(){
         $('.lazy').jail();
     });
+
     });
     </script>
     <!-- end lightbox scripts -->
@@ -57,8 +58,8 @@
         display: inline !important;
         padding: 0 !important;
         margin: 0 !important;
-    }</style
+    }</style>
 
     <script type="text/javascript" src="{$BASEURL}res/enduser/js/dropdown.js"></script>
-    <script type="text/javascript" src="{$BASEURL}res/enduser/js/loopedslider.min.js"></script>
+    <script type="text/javascript" src="{$BASEURL}res/enduser/js/loopedslider-min.js"></script>
 </head>

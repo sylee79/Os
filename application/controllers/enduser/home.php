@@ -2,7 +2,7 @@
 
 require_once "baseendusercontroller.php";
 
-class main extends baseendusercontroller {
+class home extends baseendusercontroller {
 	
 	function __construct() {
 		parent::__construct();
@@ -11,7 +11,7 @@ class main extends baseendusercontroller {
 	public function index()	{
         $data = array();
         $data['productList']=$this->libenduser->getNewArrival();
-		$this->render('main', $data);
+		$this->render('home', $data);
 	}
 
 	public function login() {

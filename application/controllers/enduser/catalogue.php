@@ -25,6 +25,10 @@ class catalogue extends baseendusercontroller {
                                                         ,'variation_type_en'=>$entry['variation_type_en']
                                                         , 'variation_value_en'=>explode(',', $entry['variation_value_en'])));
         }
+        if( $this->session->userdata('added2cart')){
+            $this->session->unset_userdata('added2cart');
+            $data['message']='Item has added into shopping cart!';
+        }
 		$this->render('product_detail', $data);
 	}
 

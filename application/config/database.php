@@ -51,6 +51,7 @@ $active_record = TRUE;
 $db_domain_mapping = array(
     'test.local:80' => 'sc_dev',
     'test.local:8585' => 'sc_dev',
+    'littleprecious.3owl.com:80' => 'sc_dev',
     'littleprecious.comeze.com:80' => 'sc_dev',
 
 );

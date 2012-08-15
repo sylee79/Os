@@ -40,9 +40,16 @@
                                 Price: SGD{$product.price}
                             </div>
                             <br/>
+                            <script type="text/javascript">
+                                function add2cart(){
+                                    $.post("/user/add2cart", $("#add_to_cart"));
+                                }
+                            </script>
 
                             <form method="post" action="/user/add2Cart" id="add_to_cart">
                             <input type="hidden" name="product_id" value="{$product.id}">
+                                <input type="hidden" name="product_id" value="{$product.id}">
+                                <input type="hidden" name="product_link" value="{$product.product_link}">
                             {foreach $productVariation as $entry}
                                     {$entry.variation_type_en}:
                                         <select name="variation_{$entry.variation_type_en}">
@@ -55,7 +62,18 @@
 
                             Quantity: <input name="quantity" value="1">
                             <br/><br/>
-                            <input type="submit" value="Add to Cart">
+                            <input class="add2cart" type="submit" onclick="add2cart()" value="Add to Cart">
+                                <p id="message" style="color:red;">{if isset($message)}{$message}{/if}</p>
+                                {literal}
+                                <script type="text/javascript">
+                                jQuery(document).ready(function ($) { $(function(){
+                                    $('#message').animate({"top":"-=80px"},500) .delay(500) .animate({"opacity":"0"},100).delay(500);
+                                    $('#message').animate({"opacity":"100"},100) .delay(500) .animate({"opacity":"0"},100).delay(500);
+                                    $('#message').animate({"opacity":"100"},100) .delay(500) .animate({"opacity":"0"},100).delay(500);
+                                    $('#message').animate({"opacity":"100"},100) .delay(3000) .animate({"opacity":"0"},1000);
+                                }); });
+                                </script>
+                                {/literal}
                             </form>
 
                         </td>

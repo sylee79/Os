@@ -42,7 +42,7 @@ input { padding:5px; margin-right:4px;}
 #container {width:100%; min-height: 200px; margin: 0 auto; text-align:center; font-size: 13px; line-height: 1.5; }
 #container div.wrapper {margin: 0 auto; width: 900px; text-align: left; padding: 0; }
 #container div.wrapper a{margin: 0 0 0 0; float: right; }
-#container div.wrapper a.cart{margin: 0 0 0 0; padding: 10px 10px 10px 52px; float: right; font-size:12px; color:#FFFF00; background:#FFFFFF url(../images/cart_button.png) no-repeat; }
+#container div.wrapper a.cart{margin: 0 0 0 0; padding: 10px 35px 25px 52px; float: right; font-size:12px; color:#FFFF00; background:#FFFFFF url(../images/cart_button.png) no-repeat; }
 #container div.cleaner {clear: both; font-size:1px; height: 1px; margin:0; line-height: 1px; }
 #container div.sep {font-size:1px; height: 1px; margin:0; line-height: 1px; margin: 2px 0; border-bottom: dotted 1px #58626a; }
 
@@ -188,6 +188,10 @@ h2.title {font-size: 18px; font-weight: bold; margin-top: 25px; padding-bottom: 
     border-radius: 2px;
     border: none;
 }
+#content input.add2cart {background-color: #f05e4c; color:#FFFF00; cursor:pointer;}
+#content input.checkout {background-color: #f05e4c; color:#FFFF00; cursor:pointer;}
+#container div.wrapper a.cart{margin: 0 0 0 0; padding: 10px 35px 25px 52px; float: right; font-size:12px; color:#FFFF00; background:#FFFFFF url(../images/cart_button.png) no-repeat; }
+
 #content .content h2.title {clear: left; }
 #content .postmetadata {margin: 0 0 10px; padding:0 0 10px; color: #999; border-bottom:1px dotted #474747; text-transform:uppercase; font-size:10px; display:block;}
 #content .postmetadata a {}

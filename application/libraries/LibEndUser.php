@@ -34,7 +34,7 @@ class LibEnduser{
 
     function getProductDetails($productShortcut){
         $config =& get_config();
-        $q = 'select p.id, p.title_en, p.description_en, p.price, concat(\''.$config['enduser_product_url'].'\',p.product_shortcut) as productLink, c.category_name_en'
+        $q = 'select p.id, p.title_en, p.description_en, p.price, concat(\''.$config['enduser_product_url'].'\',p.product_shortcut) as product_link, c.category_name_en'
             .' from product p'
             .' left join category c on c.id = p.category_id and c.is_deleted = 0'
             .' where p.product_shortcut = :productShortcut order by p.added_on';
@@ -45,12 +45,17 @@ class LibEnduser{
 
     function getProductImages($productId){
         $config =& get_config();
-        $q = 'select concat(\''.$config['base_url'].'\', pi.image_url) as image_url, pi.description'
+        $q = 'select pi.image_url, pi.description'
             .' from product_image pi'
             .' where pi.product_id = '.$productId
             .' and pi.is_deleted = 0'
             .' order by is_main desc';
-        return $this->getDBData($q);
+        $result = $this->getDBData($q);
+        $count = count($result);
+        for($i=0; $i<$count; ++$i){
+            $result[$i]['image_url']=$config['base_url'].substr($result[$i]['image_url'], 0, strlen($result[$i]['image_url'])-4).'-'.PRODUCT_DETAIL_RESOLUTION.'.jpg';
+        }
+        return $result;
     }
 
     function getProduct($categoryId, $page=1, $pageSize=20){
@@ -71,19 +76,25 @@ class LibEnduser{
     }
 
     function getNewArrival($page=1, $pageSize=100){
+        Common::startBenchmark(__FUNCTION__);
         if(!is_numeric($page) || !is_numeric($pageSize)){
             return false;
         }
         $config =& get_config();
         $limit = ($page-1)*$pageSize .','.$pageSize;
-        $q = 'select distinct(p.id), p.title_en, p.description_en, p.price, concat(\''.$config['enduser_product_url'].'\',p.product_shortcut) as productLink, concat(\''.$config['base_url'].'\', pi.image_url) as image_url, c.category_name_en'
+        $q = 'select distinct(p.id), p.title_en, p.description_en, p.price, concat(\''.$config['enduser_product_url'].'\',p.product_shortcut) as productLink, pi.image_url, c.category_name_en'
             .' from product p'
             .' left join product_image pi on pi.product_id = p.id and pi.is_main = 1 and p.is_deleted = 0'
             .' left join category c on c.id = p.category_id and c.is_deleted = 0'
             .' where p.is_deleted  = 0 order by p.added_on desc'
             .' limit '.$limit;
-        return $this->getDBData($q);
-
+        $result = $this->getDBData($q);
+        $count = count($result);
+        for($i=0; $i<$count; ++$i){
+            $result[$i]['image_url']=$config['base_url'].substr($result[$i]['image_url'], 0, strlen($result[$i]['image_url'])-4).'-'.NEW_ARRIVAL_RESOLUTION.'.jpg';
+        }
+        Common::endBenchmark(__FUNCTION__);
+        return $result;
     }
 
     function getDBData($query, $returnResult = true, $params = array())

@@ -71,7 +71,7 @@ if (0) {
 		$folder = "enduser";
 //	}
 	
-	$route["default_controller"] = "$folder/main";
+	$route["default_controller"] = "$folder/home";
 
 	$requestUri = $_SERVER["REQUEST_URI"];
 	$requestToks = strtok($requestUri, "/");
@@ -95,6 +95,8 @@ if (0) {
 		}
 	}
 	$route['404_override'] = '';
+    $route['cron']='cron/cron';
+    $route['cron/(:any)']='cron/cron/$1';
     $route['admin']='admin/admin';
     $route['admin/(:any)']='admin/admin/$1';
 	$route['(:any)'] = $route['default_controller'] . "/$1";

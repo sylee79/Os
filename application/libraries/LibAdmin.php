@@ -7,10 +7,35 @@ class LibAdmin
     function deleteProduct($id){
         if(!$id)return false;
 
+        $this->deleteImageOfProduct($id);
+
         $q = 'update product set is_deleted = 1 where id = '.$id;
         return $this->getDBData($q,false);
     }
 
+    function getThumbnailConfig(){
+        return array(
+            NEW_ARRIVAL_RESOLUTION=>array('width'=>280, 'height'=>224)
+            ,PRODUCT_DETAIL_RESOLUTION=>array('width'=>480, 'height'=>384)
+        );
+    }
+
+    function createThumbnail($mainImageFile){
+        $mainImageFile = substr($mainImageFile, 1);
+        $mainFileName = substr($mainImageFile, 0, strlen($mainImageFile)-4);
+        $thumbnailConfig = $this->getThumbnailConfig();
+        $count=0;
+        foreach ($thumbnailConfig as $key=>$resolution){
+            $thumbnailFileName = $mainFileName.'-'.$key.'.jpg';
+            if(file_exists($thumbnailFileName))continue;
+            $thumbnail = new SimpleImage();
+            $thumbnail->load($mainImageFile);
+            $thumbnail->resizeKeepRatio($resolution['width'], $resolution['height']);
+            $thumbnail->save($thumbnailFileName);
+            ++$count;
+        }
+        return $count;
+    }
 
     function createProduct($user, $data, $variationData)
     {
@@ -101,14 +126,38 @@ class LibAdmin
 		return array('width'=>$width, 'filepath' =>Common::uploadPrecropImage($srcFile));
 	}
 
-    function deleteProductImage($id){
-        $q = 'select image_url from product_image where id = '.$id;
+    function getThumbnailName($mainFile, $thumbnailKey){
+        return substr($mainFile, 0, strlen($mainFile)-4).'-'.$thumbnailKey.'.jpg';
+    }
+
+    function deleteImageOfProduct($productId){
+        $q = 'select image_url from product_image where product_id = '.$productId.' and is_deleted = 0';
+        $result = $this->getDBData($q);
+        foreach($result as $entry){
+            if(false === stristr($entry['image_url'], 'default')){
+                unlink(BASEPATH."../".$entry['image_url']);
+                $thumbnailConfig = $this->getThumbnailConfig();
+                foreach ($thumbnailConfig as $key=>$resolution){
+                    unlink($this->getThumbnailName(BASEPATH."../".$entry['image_url'], $key));
+                }
+            }
+        }
+        $q = 'delete from product_image where product_id = '.$productId;
+        return $this->getDBData($q, false);
+    }
+
+    function deleteProductImage($imageId){
+        $q = 'select image_url from product_image where id = '.$imageId;
         $result = $this->getDBData($q);
         if(isset($result[0])){
             if(false === stristr($result[0]['image_url'], 'default')){
                 unlink(BASEPATH."../".$result[0]['image_url']);
+                $thumbnailConfig = $this->getThumbnailConfig();
+                foreach ($thumbnailConfig as $key=>$resolution){
+                    unlink($this->getThumbnailName(BASEPATH."../".$result[0]['image_url'], $key));
+                }
             }
-            $q = 'delete from product_image where id = '.$id;
+            $q = 'delete from product_image where id = '.$imageId;
             return $this->getDBData($q, false);
         }
         return false;
@@ -128,6 +177,8 @@ class LibAdmin
 
 			$productImage->image_url = $destFile;
 			$productImage->save();
+
+            $this->createThumbnail($destFile);
 
             $q = "select id from product_image where product_id = $id and is_main = 1 and image_url like '%default.jpg'";
 
@@ -241,7 +292,6 @@ left join category c2 on c1.id = c2.parent_category_id
 where c1.parent_category_id is null';
         return $this->getDBData($q);
     }
-
 
     function getDBData($query, $returnResult = true, $params = array())
     {

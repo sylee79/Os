@@ -9,7 +9,9 @@ class wildcard_controller extends baseendusercontroller {
 	}
 
 	public function index($params=false)	{
-		echo "Hello End User WILDCARD controller $params";
+        $config =& get_config();
+        redirect($config['enduser_url']);
+//		echo "Hello End User WILDCARD controller $params";
 	}
 
     public function orderDetails(){
